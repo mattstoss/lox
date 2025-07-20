@@ -15,6 +15,8 @@ int main(void) {
             return 0;
         }
 
+        // FIXME: check if MAX_INPUT_LEN was too small and we didn't consume all input 
+
         Token tokens[MAX_TOKEN];
         size_t token_count = scan(input, strlen(input), tokens, MAX_TOKEN);
         for (size_t i = 0; i < token_count; i++) {

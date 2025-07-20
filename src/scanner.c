@@ -4,6 +4,8 @@
 
 #include "scanner.h"
 
+#define MAX_NUMBER_LEN 32
+
 static int is_numeric(char c) {
     return c >= '0' && c <= '9';
 }
@@ -27,7 +29,7 @@ size_t scan(const char *s, size_t len, Token *out, size_t max_tokens) {
 
             size_t num_len = current - start;
 
-            char tmp[32];
+            char tmp[MAX_NUMBER_LEN];
             if (num_len >= sizeof(tmp) - 1) {
                 printf("scanner: numeric literal too long\n");
                 break;
@@ -36,6 +38,7 @@ size_t scan(const char *s, size_t len, Token *out, size_t max_tokens) {
             memcpy(tmp, &s[start], num_len);
             tmp[num_len] = '\0';
 
+            // FIXME: use a more resilient string parsing function
             int number = atoi(tmp);
 
             out[token_count++] = (Token){
