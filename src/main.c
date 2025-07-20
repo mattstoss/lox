@@ -17,7 +17,10 @@ int main(void) {
 
         Token tokens[MAX_TOKEN];
         size_t token_count = scan(input, strlen(input), tokens, MAX_TOKEN);
-        printf("token_count: %zu\n", token_count);
+        for (size_t i = 0; i < token_count; i++) {
+            Token *t = &tokens[i];
+            printf("Token { kind: %d lexeme: %.*s }\n", t->kind, (int)t->len, t->lexeme);
+        }
     }
 
     return 0;
