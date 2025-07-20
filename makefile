@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion
 
 TARGET = lox
 
-SOURCES = src/ast.c src/main.c src/scanner.c
+SOURCES = src/ast.c src/main.c src/scanner.c src/token.c
 OBJECTS = $(SOURCES:.c=.o)
 
 all: $(TARGET)

@@ -21,8 +21,7 @@ int main(void) {
         Token tokens[MAX_TOKEN];
         size_t token_count = scan(input, strlen(input), tokens, MAX_TOKEN);
         for (size_t i = 0; i < token_count; i++) {
-            Token *t = &tokens[i];
-            printf("Token { kind: %d lexeme: %.*s }\n", t->kind, (int)t->len, t->lexeme);
+            token_print(&tokens[i]);
         }
 
         // FIXME: implemet an actual parser

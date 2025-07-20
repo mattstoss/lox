@@ -17,3 +17,5 @@ typedef struct {
   size_t len;
   TokenLiteral literal;
 } Token;
+
+void token_print(Token *t);

@@ -16,7 +16,7 @@ ASTNode *ast_make_binary(Token *op, ASTNode *left, ASTNode *right) {
   return node;
 }
 
-static void print_indent(int indent) {
+static void indent_print(int indent) {
     for (int i = 0; i < indent; i++) {
         printf("  ");
     }
@@ -28,21 +28,17 @@ static void ast_print_indent(ASTNode *node, int indent) {
   }
 
   switch (node->kind) {
-  case AST_LITERAL: {
-    Token *val = node->as.literal.value;
-    print_indent(indent);
-    printf("%.*s\n", (int)val->len, val->lexeme);
+  case AST_LITERAL:
+    indent_print(indent);
+    token_print(node->as.literal.value);
     return;
-  }
 
-  case AST_BINARY: {
-    Token *op = node->as.binary.op;
-    print_indent(indent);
-    printf("%.*s\n", (int)op->len, op->lexeme);
+  case AST_BINARY:
+    indent_print(indent);
+    token_print(node->as.binary.op);
     ast_print_indent(node->as.binary.left, indent + 1);
     ast_print_indent(node->as.binary.right, indent + 1);
     return;
-  }
 
   default:
     printf("ast_print: unknown kind %d", node->kind);
