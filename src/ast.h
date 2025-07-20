@@ -1,3 +1,6 @@
+#pragma once
+
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "token.h"
@@ -5,13 +8,13 @@
 typedef struct ASTNode ASTNode; // forward declaration
 
 typedef struct {
-  TokenKind op;
+  Token *op;
   ASTNode *left;
   ASTNode *right;
 } ASTBinary;
 
 typedef struct {
-  TokenLiteral value;
+  Token *value;
 } ASTLiteral;
 
 typedef enum {
@@ -28,18 +31,7 @@ typedef struct ASTNode {
   } as;
 } ASTNode;
 
-ASTNode *ast_make_literal(TokenLiteral value) {
-  ASTNode *node = (ASTNode *)malloc(sizeof(ASTNode));
-  node->kind = AST_LITERAL;
-  node->as.literal.value = value;
-  return node;
-}
+ASTNode *ast_make_literal(Token *value);
+ASTNode *ast_make_binary(Token *op, ASTNode *left, ASTNode *right);
 
-ASTNode *ast_make_binary(TokenKind op, ASTNode *left, ASTNode *right) {
-  ASTNode *node = (ASTNode *)malloc(sizeof(ASTNode));
-  node->kind = AST_BINARY;
-  node->as.binary.op = op;
-  node->as.binary.left = left;
-  node->as.binary.right = right;
-  return node;
-}
+void ast_print(ASTNode *node);

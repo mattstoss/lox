@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "ast.h"
 #include "scanner.h"
 
 #define MAX_INPUT_LEN 100
@@ -23,6 +24,15 @@ int main(void) {
             Token *t = &tokens[i];
             printf("Token { kind: %d lexeme: %.*s }\n", t->kind, (int)t->len, t->lexeme);
         }
+
+        // FIXME: implemet an actual parser
+        ASTNode* left = ast_make_literal(&tokens[0]);
+        ASTNode* middle = ast_make_literal(&tokens[2]);
+        ASTNode* right = ast_make_literal(&tokens[4]);
+        ASTNode* child = ast_make_binary(&tokens[1], left, middle);
+        ASTNode* root = ast_make_binary(&tokens[3], child, right);
+
+        ast_print(root);
     }
 
     return 0;
